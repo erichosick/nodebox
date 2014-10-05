@@ -9,17 +9,19 @@ For OSX, JavaScript Node, Express, Postgress Sql, Grunt, Mocha and Chai
 * git
 * github
 * node
+* nvm
 * [gulp](http://gulpjs.com/) ([gulp and grunt](http://jaysoo.ca/2014/01/27/gruntjs-vs-gulpjs/))
-* PostgressSql
+* postgres
 
 ### Development, Testing and CI
 
 * mocha
 * chai
-* coffeescript
 * haml
-* [Browserify](http://browserify.org/)
+* coffeescript (only if you need it)
+* [Browserify](http://browserify.org/) (only if you use it)
 * [teacup](https://github.com/goodeggs/teacup)
+* [BrowserSync](http://www.browsersync.io/) (only if you need it)
 
 ### Front End
 
@@ -28,6 +30,10 @@ For OSX, JavaScript Node, Express, Postgress Sql, Grunt, Mocha and Chai
 * [bootstrap](http://getbootstrap.com/)
 
 ## Setup OS X Development Machine
+
+Let's install everything you need to get going.
+
+Later, we will talk about how to use them.
 
 ### Git
 
@@ -39,73 +45,76 @@ READ ME! APPEND AT END OF PATH TO OVERRIDE APPLE GIT
 
     $ echo 'export PATH=/usr/local/git/bin:$PATH' >> ~/.bash_profile
 
+Reload the bash profile.    
+
+    $ source ~/.bash_profile
+
 [Git Config](http://git-scm.com/book/en/Customizing-Git-Git-Configuration)
 
     $ git config --global user.name "DEVELOPER_NAME"
     $ git config --global user.email DEVELOPER_EMAIL
-    $ git config --global core.editor mate // or your own
+    $ git config --global core.editor vi // or your own
 
-### Node Version Manager ([NVM](https://github.com/creationix/nvm))
+### Node VM, Node and NPM
 
-Work on this later
+#### Install [NVM](https://github.com/creationix/nvm)
 
-### Node and NPM
+With [Brew](http://brewformulas.org/Nvm).
 
-Install [Node.js](http://nodejs.org/).
-
-Setup Npm Global Install [Without Sudo](https://stackoverflow.com/questions/19352976/npm-modules-wont-install-globally-without-sudo).
-
-    $ npm update -g npm
-    $ npm config set prefix ~/npm
-    $ echo 'export PATH="$PATH:$HOME/npm/bin"' >> ~/.bashrc
-
+    $ brew install nvm
+    $ echo 'source $(brew --prefix nvm)/nvm.sh' >> ~/.bash_profile
     $ source ~/.bashrc
+
+Setup NVM (latest version was 0.10 at the time of this writing)
+
+    $ nvm install 0.10
+    $ echo 'export PATH="$PATH:$HOME/npm/bin"' >> ~/.bashrc
+    $ nvm alias default 0.10
 
     $ npm set init.author.name "YOUR_NAME"
     $ npm set init.author.email "YOUR_EMAIL"
     $ npm set init.author.url "http://YOUR_SITE"
 
+List version installed
+
+    $ nvm ls
+
+
 Publishing a node module? Need a user
 
-    $ npm adduser // creates ~/.npmrc
+    // creates ~/.npmrc
+    $ npm adduser 
 
-### Gulp
+## Using A Full-Stack Project
 
-Install [Gulp globally](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md).
+Follow steps in "Create a New Project".
 
-    $ npm install -g gulp // may need sudo
+### Development
 
-### Express ([Expressjs](http://expressjs.com/))
-
-    $ npm install -g express
-
-### Mocha Testing ([Mocha](https://visionmedia.github.io/mocha/))
-
-    $ npm update -g npm
-    $ npm install -g mocha
-
-### [Browserify](http://browserify.org/)
-
-    $ npm install -g browserify // may need sudo
-
-## NEW Full-Stack Project
-
-Development (You Are Ready To Go)
+Go to directory of project, edit and start continuous development environment
 
     $ cd ~/Projects/PROJ
     $ mate . // or use whatever editor you use
-    $ gulp
+    
+Run tests
+    
+    $ gulp watch-mocha
 
-Run tests individually
+Or running directly with mocha
 
-    $ mocha "tests/**/*.js" -w -u bdd -c
-
-Or using npm
-
-    $ npm test
-  
+    $ mocha "tests/**/*test.js" -w -u bdd -c
 
 Code away!
+
+### Publishing a Module
+
+    $ git add .
+    $ git add -A
+    $ git commit -m “Some message”
+    $ git push origin master
+    $ git tag 0.1.1 // VERSION in package.json
+    $ git push origin master —tag
+    $ npm publish
 
 ## Creating a New Project ([Creating a Node Project](http://quickleft.com/blog/creating-and-publishing-a-node-js-module), [Node From Scratch](https://www.codefellows.org/blog/create-a-node-js-project-from-scratch-with-node-sass))
 
@@ -146,6 +155,8 @@ For user issues:
 
 ### Continuous Development ([Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md))
 
+A lot can be done with gulp. This document can help some but there are a lot of ways to setup your automate build processes.
+
     $ npm install --save-dev gulp
     $ touch gulpfile.js
     $ mate gulpfile.js
@@ -169,8 +180,8 @@ Great reads:
 
 [Add a test, always add test](https://www.youtube.com/watch?v=7BpwdhAhep0&t=07)!
 
-    $ npm install mocha --save-dev
-    $ npm install chai --save-dev // may need sudo
+    $ npm install --save-dev mocha
+    $ npm install --save-dev chai // may need sudo
     $ npm install --save-dev gulp-mocha
     $ npm install --save-dev gulp-util
     
@@ -247,6 +258,8 @@ example:
 
 ### Browserfy ([Handbook](https://github.com/substack/browserify-handbook), [Gulp Browserify](http://viget.com/extend/gulp-browserify-starter-faq), [Bulp Browserify and Watchify](https://github.com/gulpjs/gulp/blob/master/docs/recipes/fast-browserify-builds-with-watchify.md))
 
+Note: Only need to install if your project will end up on the web.
+
 Turn your core javascript file into a single browsable .js.
 
     $ npm install --save-dev vinyl-source-stream // may need sudo?
@@ -286,11 +299,65 @@ Add the following to the existing gulpfile.js.
     $ git add -A
     $ git commit -m “Initial version”
     $ git push origin master
-    $ git tag 1.0.0 // VERSION during npm init
+    $ git tag 0.1.1 // VERSION during npm init
     $ git push origin master —tag
 
 
+## OTHER
+
+### Uninstall Everything
+
+#### When Installed from package file downloaded from node.
+
+To restart from scratch see [Uninstall Node](https://stackoverflow.com/questions/11177954/how-do-i-completely-uninstall-node-js-and-reinstall-from-beginning-mac-os-x).
+
+BE CAREFUL
+
+    $ sudo rm -rf /usr/local/lib/node_modules
+    $ sudo rm /usr/local/lib/node
+    $ sudo rm /usr/local/bin/npm
+    $ sudo rm -rf /usr/local/include/node
+    $ sudo rm -rf /usr/local/include/node_modules
+    $ rm -rf ~/.npm
+    $ sudo rm -rf /usr/local/share/man/man1/node.1
+    $ rm /usr/local/lib/dtrace/node.d
+
+
+
 ===========
+
+
+### Gulp
+
+Install [Gulp globally](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md).
+
+    $ npm install -g gulp // may need sudo
+
+### Express ([Expressjs](http://expressjs.com/))
+
+    $ npm install -g express
+
+### Mocha Testing ([Mocha](https://visionmedia.github.io/mocha/))
+
+    $ npm install -g mocha
+
+### [Browserify](http://browserify.org/)
+
+    $ npm install -g browserify // may need sudo
+
+## Old Stuff - Ignore
+
+
+    $ echo $PATH | tr : "\n" | grep "/usr/local/bin"
+
+
+Setup Npm Global Install [Without running as root](https://stackoverflow.com/questions/19352976/npm-modules-wont-install-globally-without-sudo).
+
+    $ sudo npm update -g npm
+    $ npm config set prefix ~/npm
+
+    $ source ~/.bashrc
+
 
 ## Older Configs
 
@@ -304,7 +371,4 @@ Add the following to the existing gulpfile.js.
         $ npm install grunt --save-dev // may need sudo
         $ npm install grunt-simple-mocha --save-dev
         $ touch gruntfile.js
-
-
-
 
