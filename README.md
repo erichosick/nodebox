@@ -62,7 +62,8 @@ Reload the bash profile.
 With [Brew](http://brewformulas.org/Nvm).
 
     $ brew install nvm
-    $ echo 'source $(brew --prefix nvm)/nvm.sh' >> ~/.bash_profile
+    $ echo 'export NVM_DIR=~/.nvm' >> ~/.bashrc
+    $ echo 'source $(brew --prefix nvm)/nvm.sh' >> ~/.bashrc
     $ source ~/.bashrc
 
 Setup NVM (latest version was 0.10 at the time of this writing)
@@ -79,11 +80,34 @@ List version installed
 
     $ nvm ls
 
-
 Publishing a node module? Need a user
 
     // creates ~/.npmrc
     $ npm adduser 
+
+### Local, Global and Both NPM
+
+See [Npm-folders](https://www.npmjs.org/doc/files/npm-folders.html)
+
+Running a module on command line: it needs to be global.
+
+Running a module using requires modules to be placed in PROJECT/node_modules
+
+Using a module in both: npm link
+
+
+#### Gulp Global
+
+Install [Gulp globally](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md).
+
+We are running Gulp from the command line so:
+
+    $ npm install -g gulp
+    
+#### Mocha Testing ([Mocha](https://visionmedia.github.io/mocha/))
+
+    $ npm install -g mocha
+    
 
 ## Using A Full-Stack Project
 
@@ -94,6 +118,7 @@ Follow steps in "Create a New Project".
 Go to directory of project, edit and start continuous development environment
 
     $ cd ~/Projects/PROJ
+    $ npm install
     $ mate . // or use whatever editor you use
     
 Run tests
@@ -113,7 +138,7 @@ Code away!
     $ git commit -m “Some message”
     $ git push origin master
     $ git tag 0.1.1 // VERSION in package.json
-    $ git push origin master —tag
+    $ git push origin master -—tag
     $ npm publish
 
 ## Creating a New Project ([Creating a Node Project](http://quickleft.com/blog/creating-and-publishing-a-node-js-module), [Node From Scratch](https://www.codefellows.org/blog/create-a-node-js-project-from-scratch-with-node-sass))
@@ -191,7 +216,7 @@ See [reporters](https://visionmedia.github.io/mocha/#reporters) for different re
     var mocha = require('gulp-mocha');
 
     gulp.task('mocha', function() {
-      return gulp.src(['tests/*.js'], { read: false })
+      return gulp.src(['tests/*test.js'], { read: false })
         .pipe(mocha({ reporter: 'spec' }))
         .on('error', gutil.log);
     });
@@ -300,7 +325,7 @@ Add the following to the existing gulpfile.js.
     $ git commit -m “Initial version”
     $ git push origin master
     $ git tag 0.1.1 // VERSION during npm init
-    $ git push origin master —tag
+    $ git push origin master -—tag
 
 
 ## OTHER
@@ -326,20 +351,9 @@ BE CAREFUL
 
 ===========
 
-
-### Gulp
-
-Install [Gulp globally](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md).
-
-    $ npm install -g gulp // may need sudo
-
 ### Express ([Expressjs](http://expressjs.com/))
 
     $ npm install -g express
-
-### Mocha Testing ([Mocha](https://visionmedia.github.io/mocha/))
-
-    $ npm install -g mocha
 
 ### [Browserify](http://browserify.org/)
 
@@ -371,4 +385,7 @@ Setup Npm Global Install [Without running as root](https://stackoverflow.com/que
         $ npm install grunt --save-dev // may need sudo
         $ npm install grunt-simple-mocha --save-dev
         $ touch gruntfile.js
+
+
+
 
