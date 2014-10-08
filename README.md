@@ -299,13 +299,13 @@ Open it in your favorite editor (this is textmate):
 
 Add the following:
 
-'''javascript
+```javascript
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 
 gulp.task('default', [], function() {
 });
-'''
+```
 
 ## <a name="mocha-project"></a>Step 4 - Mocha Chai Testing Backend
 
@@ -329,7 +329,7 @@ From your project directory:
 
 Your gulpfile.js:
 
-'''javascript
+```javascript
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var mocha = require('gulp-mocha');
@@ -345,7 +345,7 @@ gulp.task('mocha', function() {
 gulp.task('watch-mocha', function() {
     return gulp.watch(['src/**', 'tests/**'], ['mocha']);
 });
-'''
+```
 
 #### HAVE RETURNS IN YOUR TASKS 
 
@@ -361,28 +361,30 @@ The default task is ran when you type the following in your project directory:
     
 In our example, we will run all of our tests first, then watch for any changes in our source and test directories.
 
-'''javascript
+```javascript
 // Task is named 'default'
 // The task named 'mocha' will run and then 'watch-mocha' will run
 // When those are done, the 'default' task runs (which is empty)
 gulp.task('default', ['mocha','watch-mocha'], function() {});
-'''
+```
 
 #### Gulp Mocha Task
 
 In our example, we have placed all of our tests in a directory called tests.
 
-'''javascript
+```javascript
 // ...
 return gulp.src(['tests/*test.js'], { read: false })
 // ...
+```
 
 We can display the results of our test using different [reporters](https://visionmedia.github.io/mocha/#reporters). We are using 'spec' for our tests.
 
-'''javascript
+```javascript
 // ...
 .pipe(mocha({ reporter: 'spec' }))
 // ...
+```
 
 #### Gulp Watch Task
 
@@ -390,10 +392,11 @@ Gulp can watch changes to any directory and then run a gulp task when a change o
 
 In this case, we are watching all files in the src directory (src/**) and all files in the tests directory (tests/**). We then run the 'mocha' task if any files change in either of these directories.
 
-'''javascript
+```javascript
 // ...
 return gulp.watch(['src/**', 'tests/**'], ['mocha']);
 // ...
+```
 
 ## <a name="chai-project"></a>Step 5 - Your First Test
 
@@ -410,7 +413,7 @@ We are putting tests in the directory tests but you can use another directory. W
 
 Open your MAIN-FILE.js and add the following
 
-'''javascript
+```javascript
 var chai = require("chai");
 var expect = chai.expect;
 var LIBRARY-NAME = require("../src/MAIN-FILE.js");
@@ -420,7 +423,7 @@ describe("your first test", function() {
     expect("it works!").to.equal("it works!");
   });
 });
-'''
+```
     
 Save the file and run gulp to start testing:
 
@@ -439,13 +442,16 @@ You should see one test pass. Woo hoo!!!
 
 Add the following to the existing gulpfile.js. Check the "source" and "destination" directory.
 
-    var coffee = require('gulp-coffee');
+```javascript
+var coffee = require('gulp-coffee');
 
-    gulp.task('coffee', function() {
-      return gulp.src('./src/*.coffee')
-        .pipe(coffee({bare: true}).on('error', gutil.log))
-        .pipe(gulp.dest('./public/'))
-    });
+gulp.task('coffee', function() {
+  return gulp.src('./src/*.coffee')
+    .pipe(coffee({bare: true}).on('error', gutil.log))
+    .pipe(gulp.dest('./public/'))
+});
+```
+
 
 ### [Uglify Gulp](https://www.npmjs.org/package/gulp-uglify)
 
@@ -455,13 +461,15 @@ Make things smaller.
 
 Add the following to an existing gulpfile.js. Check the "source" and "destination" directory.
 
-    var uglify = require('gulp-uglify');
+```javascript
+var uglify = require('gulp-uglify');
 
-    gulp.task('compress', function() {
-      return gulp.src('lib/*.js')
-        .pipe(uglify())
-        .pipe(gulp.dest('dist'))
-    });
+gulp.task('compress', function() {
+  return gulp.src('lib/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('dist'))
+});
+```
     
 ### Rename Streams
 
