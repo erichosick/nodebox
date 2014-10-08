@@ -18,7 +18,7 @@ Text in ALL-CAPS is something you need to enter a value for.
 [git-link]: http://git-scm.com/ "Version control system"
 [github-link]: https://github.com/ "Place to share and store git repositories"
 [nvm-link]: https://github.com/creationix/nvm "Manage different node versions"
-[node-link]: http://http://nodejs.org/ "Run javascript outside of a browser"
+[node-link]: http://nodejs.org/ "Run javascript outside of a browser"
 [npm-link]: https://www.npmjs.org/ "Find and manage node packages"
 [gulp-link]: http://gulpjs.com/ "A system to setup automated builds"
 [postgres-link]: http://www.postgresql.org/ "Sql database systems"
@@ -26,7 +26,7 @@ Text in ALL-CAPS is something you need to enter a value for.
 * [OS X][osx-link] ([setup](#osx)) - OS X operating system.
 * [brew][brew-link] ([setup](#brew)) - Package manager for OS X.
 * [git][git-link] ([setup](#git)) - Version control system.
-* [github][github-link] ([setup](#githug), [project](#github-project)) - Place to share and store git repositories.
+* [github][github-link] ([setup](#github), [project](#github-project)) - Place to share and store git repositories.
 * [nvm][nvm-link] ([setup](#nvm)) - Manage different node versions.
 * [node][node-link] ([setup](#node)) - Run javascript outside of a browser.
 * [npm][npm-link] ([setup](#npm)) - Find and manage node packages.
@@ -162,21 +162,27 @@ With [Brew](http://brewformulas.org/Nvm).
     $ echo 'source $(brew --prefix nvm)/nvm.sh' >> ~/.bashrc
     $ source ~/.bashrc
 
-Setup NVM (latest version was 0.10 at the time of this writing)
+### <a name="node"></a> Install Node Using NVM
+
+Setup node (latest version was 0.10 at the time of this writing)
 
     $ nvm install 0.10
     $ echo 'export PATH="$PATH:$HOME/npm/bin"' >> ~/.bashrc
     $ nvm alias default 0.10
+    
+List version installed
+
+    $ nvm ls
+
+### <a name="npm"></a> Setup NPM
+
+Setup npm defaults.
 
     $ npm set init.author.name "YOUR-NAME"
     $ npm set init.author.email "YOUR-EMAIL"
     $ npm set init.author.url "http://YOUR-SITE"
 
-List version installed
-
-    $ nvm ls
-
-Publishing a node module? Then you need a user.
+Publishing a node module? Then you need to create a user.
 
     // creates ~/.npmrc
     $ npm adduser 
