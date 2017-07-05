@@ -64,7 +64,7 @@ Text in ALL-CAPS is something you need to enter a value for.
 
 ### Testing Backend
 
-[mocha-link]: https://visionmedia.github.io/mocha/ "Testing engine running on node"
+[mocha-link]: https://mochajs.org/ "Testing engine running on node"
 [chai-link]: http://chaijs.com/ "Assertion library with should, expect and assert"
 [cucumber-link]: https://github.com/cucumber/cucumber-js "BDD using gherkin"
 
@@ -231,7 +231,7 @@ We are running Gulp from the command line so:
 
 * [gulp and grunt](http://jaysoo.ca/2014/01/27/gruntjs-vs-gulpjs/)
     
-## Mocha Testing Global ([Mocha](https://visionmedia.github.io/mocha/))
+## Mocha Testing Global ([Mocha](https://mochajs.org/))
 
 ### Install
 
@@ -397,7 +397,7 @@ return gulp.src(['tests/*test.js'], { read: false })
 // ...
 ```
 
-We can display the results of our test using different [reporters](https://visionmedia.github.io/mocha/#reporters). We are using 'spec' for our tests.
+We can display the results of our test using different [reporters](https://mochajs.org/#reporters). We are using 'spec' for our tests.
 
 ```javascript
 // ...
